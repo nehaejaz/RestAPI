@@ -1,6 +1,8 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const router = express.Router() //Router is the function from express to handle the routes 
+const Product = require('../models/product') //Importing the product model
 
 router.get('/',(req,res,next)=>{
     res.status(200).json({
@@ -9,8 +11,18 @@ router.get('/',(req,res,next)=>{
 })
 
 router.post('/',(req,res,next)=>{
+    //Using Product Schema and parsing it
+    const product = new Product ({
+        // id:new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        price:req.body.price
+    });
+    product.save().then(res => 
+        {console.log("added in the DB",res)})
+        .catch(err => {console.log("There's some error",err)})
     res.status(201).json({
-        message:"Handling POST req for products"
+        message:"Handling POST req for products",
+        createdProducts: product ,
     })
 })
 
