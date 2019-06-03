@@ -4,10 +4,9 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-
-
 const ProductRoutes = require('./api/routes/products')
 const OrderRoutes = require('./api/routes/orders')
+const UserRoutes = require('./api/routes/users')
 
 //connection for MongoDB
 
@@ -42,6 +41,7 @@ app.use(bodyParser.json())
 //Our Routes which are handling the responses  
 app.use('/products',ProductRoutes)
 app.use('/orders',OrderRoutes)
+app.use('/user',UserRoutes)
 
 //Route for error handling
 app.use((req,res,next) => {
