@@ -5,7 +5,7 @@ const schema = mongoose.Schema
 //Creating a schema
 
 const OrderSchema = new schema({
-    productId: String,
+    productId: Number,
     quantity: Number
 })
 
