@@ -9,13 +9,24 @@ router.get('/',(req,res,post) => {
 })
 
 router.post('/',(req,res,post) => {
-    const order = {
+    const order = new Order({
         productId:req.body.productId,
         quantity: req.body.quantity
-    }
-    res.status(201).json({
-        message:"Orders posted",
-        Order:order
+    })
+    order.save()
+    .then(doc => {
+        console.log("order created as",doc)
+        res.status(201).json({
+            message:"Success Handling post request",
+            CreatedOrder: doc
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(201).json({
+            message:"Orders posted",
+            Order:order
+        })
     })
 })
 
